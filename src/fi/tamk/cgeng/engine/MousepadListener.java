@@ -5,8 +5,18 @@ import java.awt.event.MouseEvent;
 
 public class MousepadListener implements MouseListener{
 
+    /**
+     * Coordinate x of the cursor
+     */
+    private int mouseX = 0;
+    /**
+     * Coordinate y of the cursor
+     */
+    private int mouseY = 0;
 
-    private int mouseX, mouseY = 0;
+    /**
+     * Tells if mousebutton is pressed or not
+     */
     private boolean pressed = false;
 
 
@@ -37,18 +47,30 @@ public class MousepadListener implements MouseListener{
         pressed = false;
     }
 
+    /**
+     * @return true if mousebutton is pressed
+     */
     public boolean isMousePressed(){
         return pressed;
     }
 
+    /**
+     * @return true if mousebutton is not pressed
+     */
     public boolean isMouseReleased(){
         return !pressed;
     }
 
+    /**
+     * Returns coordinate x of mouses cursor
+     */
     public int getX(){
         return mouseX;
     }
 
+    /**
+     * Returns coordinate y of mouses cursor
+     */
     public int getY(){
         return mouseY;
     }
