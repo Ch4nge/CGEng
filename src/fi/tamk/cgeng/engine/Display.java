@@ -3,6 +3,11 @@ package fi.tamk.cgeng.engine;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
+/**
+ * Display class initializes window using JFrame.
+ * It also contains KeyboardListener and 
+ * MousepadListener classes.
+ */
 public class Display extends JFrame{
 
     /**

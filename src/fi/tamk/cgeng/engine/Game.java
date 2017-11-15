@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import fi.tamk.cgeng.scenes.*;
+import java.awt.Color;
 
 
 /**
@@ -63,6 +64,7 @@ public class Game extends JPanel implements Runnable {
         setScreenWidth(width);
         setScreenHeight(height);
         setScreenTitle(title);
+        setBackground(Color.black);
         display = new Display(this);
         sceneManager = new SceneManager(this);
     }
