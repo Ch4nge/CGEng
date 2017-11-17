@@ -16,6 +16,8 @@ public class TestScene extends Scene{
     private TileMap tileMap;
     private TestPlayer testPlayer;
     private TestPlayer testPlayer2;
+    private GameCam cam;
+
 
     public TestScene(SceneManager manager){
         super(manager);
@@ -27,6 +29,10 @@ public class TestScene extends Scene{
         testPlayer.setTileMap(tileMap);
 
         testPlayer2 = new TestPlayer(100,100,50,80,ImageLoader.loadImage("/textures/mario.png"),accessKeyboardListener());
+        cam = new GameCam(0,0,800,600);
+        cam.addObject(testPlayer);
+        cam.addObject(testPlayer2);
+        cam.addTileMap(tileMap);
     }
 
     public void onCreate(){
@@ -35,19 +41,17 @@ public class TestScene extends Scene{
 
     public void update(){
         testPlayer.update();
-
+        cam.centerOnObject(testPlayer);
+        
         if(accessMousepadListener().isMousePressed())
-            System.out.println("Mouse pressed");
+            System.out.println(accessMousepadListener().getX());
         if(testPlayer.collideWith(testPlayer2.getBounds()))
             System.out.println("COLLIDING");
     }
 
     public void paint(Graphics g){
         g.setColor(Color.RED);
-        tileMap.paint(g);
-        tileSet.getTile(0).paint(g,500,500,32,32);
-        testPlayer.paint(g);
-        testPlayer2.paint(g);
+        cam.paint(g);
     }
 
 }

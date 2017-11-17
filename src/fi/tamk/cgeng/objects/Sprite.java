@@ -34,6 +34,11 @@ public class Sprite{
             g.drawImage(image, x, y, width, height, null));
     }
 
+    public void paint(Graphics g, int xOffset, int yOffset){
+        image.ifPresent((image) -> 
+            g.drawImage(image, x-xOffset, y-yOffset, width, height, null));
+    }
+
     public void setHeight(int height){
         if(height < 0){
             this.height = 0;

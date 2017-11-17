@@ -2,6 +2,7 @@ package fi.tamk.cgeng.tiles;
 
 import java.awt.Graphics;
 import fi.tamk.cgeng.util.*;
+import fi.tamk.cgeng.engine.GameCam;
 
 public class TileMap{
     
@@ -29,11 +30,36 @@ public class TileMap{
         }
     }
 
+    public void paint(Graphics g, int xOffset, int yOffset){
+        for(int i = 0; i < tileMap.length; i++){
+            for(int j = 0; j < tileMap[i].length; j++){
+                tileSet.getTile(tileMap[i][j])
+                .paint(g,(i*tileSet.getTileWidth())-xOffset,(j*tileSet.getTileHeight()-yOffset),
+                tileSet.getTileWidth(),tileSet.getTileHeight());
+            }
+        }
+    }
+
+    public void paint(Graphics g, GameCam cam){
+        for(int i = 0; i < tileMap.length; i++){
+            for(int j = 0; j < tileMap[i].length; j++){
+                if(i*tileSet.getTileWidth()+tileSet.getTileWidth() > cam.getX() &&
+                   i*tileSet.getTileWidth() < cam.getX()+cam.getWidth() &&
+                   j*tileSet.getTileHeight()+tileSet.getTileHeight() > cam.getY() &&
+                   j*tileSet.getTileHeight() < cam.getY()+cam.getHeight()
+                   ){
+                    tileSet.getTile(tileMap[i][j])
+                    .paint(g,(i*tileSet.getTileWidth())-(int)cam.getX(),(j*tileSet.getTileHeight()-(int)cam.getY()),
+                    tileSet.getTileWidth(),tileSet.getTileHeight());
+                }
+            }
+        }
+    }
+
     private void loadMap(String path, int width, int height){
         String file = Utils.loadFileAsString(path);
         String[] tokens = file.split("\\s+");
         
-        //load Map from file
         tileMap = new int[width][height];
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
