@@ -3,9 +3,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Contains different kind of useful
+ * utility methods
+ */
 public class Utils {
 
-    
+    /**
+     * Reads file and returns String of file
+     * contents
+     * @param path path of file
+     * @return String of file contents
+     */
     public static String loadFileAsString(String path){
         StringBuilder builder = new StringBuilder();
         
@@ -20,6 +29,12 @@ public class Utils {
         return builder.toString();
     }
     
+    /**
+     * Converts String to int, if not succesful
+     * catch an error.
+     * @param number number as string
+     * @return converted int
+     */
     public static int parseInt(String number){
         try{
             return Integer.parseInt(number);
