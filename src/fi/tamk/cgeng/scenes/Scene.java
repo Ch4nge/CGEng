@@ -4,6 +4,11 @@ import java.awt.Graphics;
 import fi.tamk.cgeng.engine.KeyboardListener;
 import fi.tamk.cgeng.engine.MousepadListener;
 
+/**
+ * Scenes methods are called in Game class,
+ * Game can change between different scenes through
+ * SceneManager.
+ */
 public abstract class Scene{
 
     /**
@@ -27,7 +32,7 @@ public abstract class Scene{
 
     /**
      * Updating of scene (movement, inputs)
-     * happens this method.
+     * happens in this method.
      */
     public abstract void update();
 

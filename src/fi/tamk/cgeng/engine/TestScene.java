@@ -33,6 +33,7 @@ public class TestScene extends Scene{
         cam.addObject(testPlayer);
         cam.addObject(testPlayer2);
         cam.addTileMap(tileMap);
+        cam.centerOnObject(testPlayer);
     }
 
     public void onCreate(){

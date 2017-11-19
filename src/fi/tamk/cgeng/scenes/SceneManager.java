@@ -35,6 +35,7 @@ public class SceneManager{
      */
     public void setScene(Scene scene){
         currentScene = Optional.of(scene);
+        currentScene.ifPresent((s) -> s.onCreate());
     }
 
     /**
