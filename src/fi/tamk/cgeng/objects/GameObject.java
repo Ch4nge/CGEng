@@ -2,9 +2,12 @@ package fi.tamk.cgeng.objects;
 
 import fi.tamk.cgeng.engine.KeyboardListener;
 import fi.tamk.cgeng.engine.MousepadListener;
+import fi.tamk.cgeng.tiles.TileMap;
+import java.util.Optional;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
 
 /**
  * GameObject is object that has additional
@@ -20,9 +23,29 @@ public abstract class GameObject extends Sprite{
     private int boundsX = 0;
     private int boundsY = 0;
 
+    private Optional<TileMap> map;
+    private Optional<CollisionSystem> collSys;
+
     private KeyboardListener keyboardListener;
     private MousepadListener mousepadListener;
 
+    /**
+     * Constructor that initializes x, y, width, height and texture
+     * aswell as TileMap and automatic collision detection between object
+     * and TileMap. 
+     * @param x x coordinate of GameObject
+     * @param y y coordinate of GameObject
+     * @param width width of GameObject
+     * @param height height of GameObject
+     * @param image Texture of GameObject
+     * @param map tileMap we are checking collisions with
+     */
+    public GameObject(int x, int y, int width, int height, BufferedImage image, TileMap map){
+        super(x,y,width,height,image);
+        setBounds(0,0,width,height);
+        addCollisionSystem(map);
+    }
+    
     /**
      * Constructor that initializes x, y, width, height and texture
      * of GameObject. 
@@ -35,6 +58,8 @@ public abstract class GameObject extends Sprite{
     public GameObject(int x, int y, int width, int height, BufferedImage image){
         super(x,y,width,height,image);
         setBounds(0,0,width,height);
+        map = Optional.empty();
+        collSys = Optional.empty();
     }
 
     /**
@@ -51,6 +76,8 @@ public abstract class GameObject extends Sprite{
         setWidth(width);
         setX(x);
         setY(y);
+        map = Optional.empty();
+        collSys = Optional.empty();
     }
 
     /**
@@ -58,13 +85,24 @@ public abstract class GameObject extends Sprite{
      */
     public abstract void move();
 
+
+    /**
+     * Adds automatic collision system between tileMap
+     * and object
+     */
+    public void addCollisionSystem(TileMap map){
+        collSys = Optional.of(new CollisionSystem(this));
+        this.map = Optional.of(map);
+    }
+
     /**
      * update method, this is being called in 
      * scenes update.
      */
     public void update(){
         move();
-        updateBounds(boundsX, boundsY);            
+        updateBounds(boundsX, boundsY);
+        collSys.ifPresent( coll -> coll.updatePoints());
     }
 
     /**
@@ -75,7 +113,6 @@ public abstract class GameObject extends Sprite{
     public void updateBounds(int boundsX, int boundsY){
         bounds.setLocation(getX()+boundsX, getY()+boundsY);
     }
-
 
     /**
      * Set bounds to GameObject
@@ -180,4 +217,50 @@ public abstract class GameObject extends Sprite{
         return bounds.intersects(rect);
     }
 
+    /**
+     * Returns Optional TileMap this object is checking collisions
+     * with.
+     * @return TileMap of the GameObject
+     */
+    public Optional<TileMap> getTileMap(){
+        return map;
+    }
+
+    /**
+     * Used to move player in x -axis, checks for 
+     * collisions if CollisionSystem is present, use negative number
+     * to move left, positive number to right
+     * @param speed how much we are moving on x-axis
+     */
+    public void moveX(int speed){
+        if(collSys.isPresent()){
+            collSys.ifPresent( colls -> {
+                if(!colls.checkCollision(colls.getLeftCollPoints(),speed,0) &&
+                   !colls.checkCollision(colls.getRightCollPoints(),speed,0)){
+                    setX(getX()+speed);
+                }
+            });
+        }else{
+            setX(getX() + speed);
+        }
+    }
+
+    /**
+     * Used to move player in y -axis, checks for 
+     * collisions if CollisionSystem is present, use negative number
+     * to move up, positive number to down
+     * @param speed how much we are moving on y-axis
+     */
+    public void moveY(int speed){
+        if(collSys.isPresent()){
+            collSys.ifPresent( colls -> {
+                if(!colls.checkCollision(colls.getDownCollPoints(), 0, speed) &&
+                   !colls.checkCollision(colls.getUpCollPoints(),0, speed)){
+                    setY(getY()+speed);
+                }
+            });
+        }else{
+            setY(getY() + speed);
+        }
+    }
 }

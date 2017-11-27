@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import fi.tamk.cgeng.scenes.*;
 import java.awt.Color;
-
+import java.awt.Graphics2D;
 
 /**
  * Game class handels game loop, drawing and updating
@@ -150,8 +150,9 @@ public class Game extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
         sceneManager.getScene().ifPresent((scene) ->
-            scene.paint(g));
+            scene.paint(g2));
     }
 
     /**
@@ -165,7 +166,7 @@ public class Game extends JPanel implements Runnable {
      * Called after when game stops running
      */
     private void dispose(){
-
+        
     }
 
     /**

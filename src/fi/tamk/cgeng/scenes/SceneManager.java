@@ -30,7 +30,7 @@ public class SceneManager{
     }
 
     /**
-     * Changes current scene.
+     * Changes current scene and calls its onCreate method
      * @param scene New scene
      */
     public void setScene(Scene scene){

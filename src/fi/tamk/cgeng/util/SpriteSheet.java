@@ -30,4 +30,27 @@ public class SpriteSheet {
     public BufferedImage crop(int x, int y, int width, int height){
         return sheet.getSubimage(x, y, width, height);
     }
+
+    /**
+     * Crops all images from SpriteSheet and returns
+     * array of BufferedImages
+     * @return Contents of SpriteSheet as BufferedImage array
+     */
+    public BufferedImage[] cropAll(int width, int height, int imgWidth, int imgHeight){
+        BufferedImage[] tmp = new BufferedImage[width * height];
+        int cropPointX = 0;
+        int cropPointY = 0;
+        int index = 0;
+
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
+                cropPointX = j * imgWidth;
+                cropPointY = i * imgHeight;
+                tmp[index] = crop(cropPointX, cropPointY,
+                    imgWidth, imgHeight);
+                index++;
+            }
+        }
+        return tmp;
+    }
 }

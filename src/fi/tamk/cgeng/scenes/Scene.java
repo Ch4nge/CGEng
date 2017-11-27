@@ -43,6 +43,10 @@ public abstract class Scene{
     public abstract void paint(Graphics g);
 
     /**
+     * Disposes contents of this scene
+     */
+     public abstract void dispose();
+    /**
      * @return sceneManager of this Scene.
      */
     public SceneManager getSceneManager(){
