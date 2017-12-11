@@ -1,8 +1,9 @@
 package fi.tamk.cgeng.tiles;
 
 import java.awt.Graphics;
-import fi.tamk.cgeng.util.*;
-import fi.tamk.cgeng.engine.GameCam;
+import fi.tamk.cgeng.util.Utils;
+import fi.tamk.cgeng.util.GameCam;
+
 /**
  * TileMap is map of tiles. Map is used to draw
  * tiles from TileSet to correct locations using
@@ -135,6 +136,14 @@ public class TileMap{
     }
 
     /**
+     * Returns int map of tiles.
+     * @return int map of tiles
+     */
+    public int[][] getTileMap(){
+        return tileMap;
+    }
+
+    /**
      * Returns tile at tileMap's [x][y]
      * @param x x coordinate of tileMap
      * @param y y coordinate of tileMap
@@ -148,13 +157,17 @@ public class TileMap{
 
     /**
      * Returns tile at coordinate(in pixels).
+     * Returns tile with id of 0 if there is no tile
      * @param x x coordinate in pixels
      * @param y y coordinate in pixels
      */
     public Tile tileAtCoord(int x, int y){
-        if(x/tileSet.getTileWidth() > 0 && 
+        if(x < 0|| y < 0){
+            return tileSet.getTile(0);
+        }
+        if(x/tileSet.getTileWidth() >= 0 && 
             x/tileSet.getTileWidth() < tileMap.length && 
-            y/tileSet.getTileHeight() > 0 && 
+            y/tileSet.getTileHeight() >= 0 && 
             y/tileSet.getTileHeight() < tileMap[0].length)
             {
             return tileSet.getTile(tileMap[x / tileSet.getTileWidth()]
@@ -162,4 +175,28 @@ public class TileMap{
         }
         return tileSet.getTile(0);
     }
+
+    /**
+     * Changes tile at tileMap[x][y]
+     * @param x x of tile being changed
+     * @param y y of tile being changed
+     * @param id new id of the tile
+     */
+     public void changeTileAt(int x, int y, int id){
+         if(x >= 0 && x < tileMap.length &&
+            y >= 0 && y < tileMap[0].length){
+                tileMap[x][y] = id;
+            }
+     }
+    /**
+     * Changes tile at coordinate x, y.
+     * @param x x coordinate of tile
+     * @param y y coordinate of tile
+     * @param id ne id of the tile
+     */
+     public void changeTileAtCoord(int x, int y, int id){
+        int indexX = x/tileSet.getTileWidth();
+        int indexY = (int)(y/tileSet.getTileHeight());
+        changeTileAt(indexX, indexY, id);
+     }
 }

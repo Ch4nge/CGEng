@@ -45,6 +45,23 @@ public abstract class GameObject extends Sprite{
         setBounds(0,0,width,height);
         addCollisionSystem(map);
     }
+
+    /**
+     * Constructor that initializes x, y, width, height and texture
+     * aswell as TileMap and automatic collision detection between object
+     * and TileMap. 
+     * @param x x coordinate of GameObject
+     * @param y y coordinate of GameObject
+     * @param width width of GameObject
+     * @param height height of GameObject
+     * @param image Texture of GameObject
+     * @param map tileMap we are checking collisions with
+     */
+    public GameObject(int x, int y, int width, int height, TileMap map){
+        super(x,y,width,height);
+        setBounds(0,0,width,height);
+        addCollisionSystem(map);
+    }
     
     /**
      * Constructor that initializes x, y, width, height and texture
@@ -224,6 +241,14 @@ public abstract class GameObject extends Sprite{
      */
     public Optional<TileMap> getTileMap(){
         return map;
+    }
+
+    /**
+     * Returns CollisionSystem of this object.
+     * @return CollisionSystem of this object.
+     */
+    public Optional<CollisionSystem> getCollisionSystem(){
+        return collSys;
     }
 
     /**

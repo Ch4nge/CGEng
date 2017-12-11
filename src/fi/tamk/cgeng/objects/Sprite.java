@@ -63,6 +63,7 @@ public class Sprite{
         setWidth(width);
         setX(x);
         setY(y);
+        image = Optional.empty();
     }
 
     /**

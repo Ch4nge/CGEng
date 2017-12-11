@@ -67,6 +67,11 @@ public class TileSet{
     private int tileHeight;
 
     /**
+     * Scale of the tileMap
+     */
+    private float scale = 1.0f;
+
+    /**
      * Constructor that initializes width and height with
      * default values
      */
@@ -82,6 +87,17 @@ public class TileSet{
     public TileSet(int tileWidth, int tileHeight){
         setTileWidth(tileWidth);
         setTileHeight(tileHeight);
+    }
+    /**
+     * Constructor that initializes width and height and scale
+     * @param tileWidth width of tile in TileSet
+     * @param tileHeight height of tile in TileSet
+     * @param scale scale of tile in TileSet
+     */
+    public TileSet(int tileWidth, int tileHeight, float scale){
+        setTileWidth(tileWidth);
+        setTileHeight(tileHeight);
+        setScale(scale);
     }
 
     /**
@@ -106,6 +122,21 @@ public class TileSet{
         this.tiles = tiles;
         setTileHeight(tileHeight);
         setTileWidth(tileWidth);
+    }
+
+    /**
+     * Constructor that initializes tilemap, tilewidth,
+     * tileheight and scale. 
+     * @param tiles Array of tiles that is added to TileSet
+     * @param tileHeight Height of single tile on TileSet
+     * @param tileWidth Width of single tile on TileSet
+     * @param scale scale of tile in TileSet
+     */
+    public TileSet(Tile[] tiles, int tileHeight, int tileWidth, float scale){
+        this.tiles = tiles;
+        setTileHeight(tileHeight);
+        setTileWidth(tileWidth);
+        setScale(scale);
     }
 
     /**
@@ -159,19 +190,39 @@ public class TileSet{
     }
     
     /**
-     * Returns height of each tile on set
-     * @return Height of tile
+     * Returns scale of the tileMap
+     * @return scale
      */
-    public int getTileHeight(){
-        return tileHeight;
+    public float getScale(){
+        return scale;
     }
 
     /**
-     * Returns width of each tile on set
-     * @return Width of tile
+     * Sets scale of the TileMap.
+     * @param scale new scale of the tilemap
+     */
+    public void setScale(float scale){
+        if(scale > 0){
+            this.scale = scale;
+        }else{
+            this.scale = 0;
+        }
+    }
+
+    /**
+     * Returns height of tile times scale
+     * @return Height times scale
+     */
+    public int getTileHeight(){
+        return (int)((float)tileHeight * scale);
+    }
+
+    /**
+     * Returns width of tile times scale
+     * @return Width times scale
      */
     public int getTileWidth(){
-        return tileWidth;
+        return (int)((float)tileWidth * scale);
     }
 
 }

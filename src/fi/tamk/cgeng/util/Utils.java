@@ -1,6 +1,8 @@
 package fi.tamk.cgeng.util;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -27,6 +29,25 @@ public class Utils {
             e.printStackTrace();
         }
         return builder.toString();
+    }
+    
+    /**
+     * Writes 2d int array to file, easy tool to 
+     * write TileMaps to txt files
+     * @param filename name of the file
+     * @param x 2d int array that is saved to file
+     */
+    public static void tilemapToFile (String filename, int[][] x){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
+            for (int i = 0; i < x[0].length; i++) {
+                for(int j = 0; j < x.length; j++){
+                    writer.write(x[j][i]+" ");
+                }
+            writer.newLine();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }  
     }
     
     /**

@@ -159,14 +159,15 @@ public class Game extends JPanel implements Runnable {
      * Stops the gameloop
      */
     public void stop(){
-
+        running = false;
     }
 
     /**
      * Called after when game stops running
      */
     private void dispose(){
-        
+        sceneManager.getScene().ifPresent((scene) -> 
+            scene.dispose());
     }
 
     /**

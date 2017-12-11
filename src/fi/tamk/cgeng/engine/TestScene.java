@@ -15,6 +15,7 @@ public class TestScene extends Scene{
     private TestPlayer testPlayer;
     private TestPlayer testPlayer2;
     private GameCam cam;
+    private GameText teksti;
 
 
     public TestScene(SceneManager manager){
@@ -31,6 +32,7 @@ public class TestScene extends Scene{
         cam.addObject(testPlayer2);
         cam.addTileMap(tileMap);
         cam.centerOnObject(testPlayer);
+        teksti = new GameText("LOL!",50,50);
     }
 
     public void onCreate(){
@@ -40,16 +42,12 @@ public class TestScene extends Scene{
     public void update(){
         testPlayer.update();
         cam.centerOnObject(testPlayer);
-        
-        if(accessMousepadListener().isMousePressed())
-            System.out.println(accessMousepadListener().getX());
-        if(testPlayer.collideWith(testPlayer2.getBounds()))
-            System.out.println("COLLIDING");
     }
 
     public void paint(Graphics g){
         g.setColor(Color.RED);
         cam.paint(g);
+        teksti.paint(g);
     }
 
     public void dispose(){

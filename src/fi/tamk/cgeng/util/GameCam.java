@@ -1,4 +1,4 @@
-package fi.tamk.cgeng.engine;
+package fi.tamk.cgeng.util;
 
 import fi.tamk.cgeng.objects.*;
 import fi.tamk.cgeng.tiles.*;
@@ -134,6 +134,13 @@ public class GameCam{
      */
     public void addTileMap(TileMap tileMap){
         this.tileMap = Optional.of(tileMap);
+    }
+
+    /**
+     * Removes TileMap from camera
+     */
+    public void removeTileMap(){
+        this.tileMap = Optional.empty();
     }
 
     /**

@@ -11,6 +11,10 @@ public class Animator {
      * List of different frames of your animation.
      */
     private BufferedImage[] frames;
+    /**
+     * List of generated flipped frames of your animation.
+     */
+    private BufferedImage[] flippedFrames;
 
     /**
      * Image of the animation that is shown currently.
@@ -62,19 +66,26 @@ public class Animator {
 
     /**
      * Constructor that initializes all needed attributes.
+     * Generates flipped animation if generateFlipped
+     * parameter is true. 
      * @param animation frames of the animation
      * @param time Time it takes to switch between images(seconds)
+     * @param generateFlipped true = generate flipped animation
      */
-    public Animator(BufferedImage[] animation, double time){
+    public Animator(BufferedImage[] animation, double time, boolean generateFlipped){
         frames = animation;
         currentFrameID = 0;
         currentFrame = frames[currentFrameID];
+        if(generateFlipped){
+            generateAnimationFlip();   
+        }
         frameTime = time;
         setFrameTime(time);
         running = false;
         flipped = false;
         unprocessedTime = 0;
         lastTime = System.nanoTime() / 1000000000.0;
+        
     }
 
     /**
@@ -97,7 +108,11 @@ public class Animator {
                 }else{
                     currentFrameID = 0;
                 }
-                currentFrame = frames[currentFrameID];
+                if(!flipped){
+                    currentFrame = frames[currentFrameID];
+                }else{
+                    currentFrame = flippedFrames[currentFrameID];
+                }
                 delta = 0;
             }
         }
@@ -123,7 +138,11 @@ public class Animator {
         unprocessedTime = 0;
         running = false;
         currentFrameID = 0;
-        currentFrame = frames[0];
+        if(!flipped){
+            currentFrame = frames[currentFrameID];
+        }else{
+            currentFrame = flippedFrames[currentFrameID];
+        }
         delta = 0;
     }   
 
@@ -184,15 +203,36 @@ public class Animator {
     }
 
     /**
-     * Flips the animation.
+     * Flips the animation
      */
     public void flip(){
+        if(flippedFrames != null){
+            flipped = !flipped;
+        }else{
+            throw new NoFlippedAnimationFoundException();
+        }
+            
+    }
+
+    /**
+     * Generate flipped animation
+     */
+    public void generateAnimationFlip(){
+        flippedFrames = new BufferedImage[frames.length];
         for(int i = 0; i < frames.length; i++){
             AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
             tx.translate(-frames[i].getWidth(null), 0);
-            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-            frames[i] = op.filter(frames[i], null);
-            flipped = !flipped;
+            AffineTransformOp op = new AffineTransformOp(tx, 
+                AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+            flippedFrames[i] = op.filter(frames[i], null);
         }
     }
+
+    /**
+     * Exception that is thrown if user is trying to
+     * flip animation, when there is no flipped animation
+     * generated.
+     */
+    public class NoFlippedAnimationFoundException 
+        extends RuntimeException{}
 }

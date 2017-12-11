@@ -17,7 +17,7 @@ public class TestPlayer extends PhysicObject{
         super(x,y,width,height,image,map);
 
         setKeyboardListener(listener);
-        animator = new Animator(new SpriteSheet(ImageLoader.loadImage("/textures/marioSheet.png")).cropAll(5,1,100,175), 0.1);
+        animator = new Animator(new SpriteSheet(ImageLoader.loadImage("/textures/marioSheet.png")).cropAll(5,1,100,175), 0.1, true);
         aud = new Audio("sounds/Jump.wav");
         animator.start();
     }
@@ -42,7 +42,6 @@ public class TestPlayer extends PhysicObject{
         }
 
         if(getKeyboardListener().isKeyPressed(KeyEvent.VK_W)){
-            moveY(-3);
             aud.play();
             setForce(20);
         }

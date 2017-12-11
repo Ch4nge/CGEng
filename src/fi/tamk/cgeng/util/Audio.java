@@ -4,6 +4,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class that can play and loop .wav files.
+ */
 public class Audio {
 
     /**
