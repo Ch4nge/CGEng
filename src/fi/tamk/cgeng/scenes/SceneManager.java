@@ -23,6 +23,7 @@ public class SceneManager{
     /**
      * Constructor, initializes currentScene and game
      * variables
+     * @param game game where this SceneManager is used
      */
     public SceneManager(Game game){
         currentScene = Optional.empty();

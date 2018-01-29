@@ -54,6 +54,7 @@ public class Tile{
     }
     /**
      * sets ID of the tile.
+     * @param id new id of the tile
      */
     public void setID(int id){
         if(id < 0 || id >255){

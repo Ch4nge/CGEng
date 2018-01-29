@@ -76,6 +76,7 @@ public class CollisionSystem {
      * Constructor that initializes gameObject, creates
      * collision points, and put them on right CollisionPoints
      * lists.
+     * @param gameObject gameObject where this system is used
      */
     public CollisionSystem(GameObject gameObject){
         this.gameObject = gameObject;
@@ -185,6 +186,7 @@ public class CollisionSystem {
      * @param collList List of collision Points
      * @param x coordinate x relative to Points coordinate x
      * @param y coordinate y relative to Points coordinate y
+     * @return true if colliding
      */
     public boolean checkCollision(ArrayList<Point> collList, int x, int y){
         TileMap map = gameObject.getTileMap().orElse(null);

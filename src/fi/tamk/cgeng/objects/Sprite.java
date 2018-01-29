@@ -82,7 +82,7 @@ public class Sprite{
      * GameCam class. 
      * @param g painted with Graphics class
      * @param xOffset how much object is moved to left
-     * @param xOffset how much object is moved to up
+     * @param yOffset how much object is moved to up
      */
     public void paint(Graphics g, int xOffset, int yOffset){
         image.ifPresent((image) -> 

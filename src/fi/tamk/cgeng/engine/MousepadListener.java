@@ -63,6 +63,7 @@ public class MousepadListener implements MouseListener{
 
     /**
      * Returns coordinate x of mouses cursor
+     * @return cursors x coordinate
      */
     public int getX(){
         return mouseX;
@@ -70,6 +71,7 @@ public class MousepadListener implements MouseListener{
 
     /**
      * Returns coordinate y of mouses cursor
+     * @return cursors x coordinate
      */
     public int getY(){
         return mouseY;

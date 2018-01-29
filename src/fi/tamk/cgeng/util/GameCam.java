@@ -99,6 +99,7 @@ public class GameCam{
     /**
      * Changes cameras position, so that given
      * Sprite or GameObject is in middle of camera.
+     * @param s Center camera on this sprite
      */
     public void centerOnObject(Sprite s){
         setLocation(s.getX() - getWidth()/2 + s.getWidth() / 2,
@@ -108,6 +109,7 @@ public class GameCam{
     /**
      * Add new GameObject or Sprite to list of 
      * seen objects
+     * @param s adds this sprite to list
      */
     public void addObject(Sprite s){
         objectList.add(s);
@@ -115,6 +117,7 @@ public class GameCam{
 
     /**
      * Remove object from objectList
+     * @param s removes this sprite from list
      */
     public void removeObject(Sprite s){
         objectList.remove(s);

@@ -50,7 +50,7 @@ public class GameText{
 
     /**
      * Paints text to screen.
-     * @param text is drawn by Graphics object
+     * @param g is drawn by Graphics object
      */
     public void paint(Graphics g){
         g.setFont(font);

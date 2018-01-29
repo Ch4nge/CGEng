@@ -149,6 +149,7 @@ public class TileSet{
 
     /**
      * Returns tile from index
+     * @param index index of tile
      * @return index(id) of tile
      */
     public Tile getTile(int index){

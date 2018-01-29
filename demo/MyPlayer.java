@@ -54,7 +54,7 @@ public class MyPlayer extends PhysicObject{
         if(!walking){
             animator.reset();
         }
-        //Check if wer at grond or not
+        //Check if we are at ground or not
         getCollisionSystem().ifPresent( coll -> {
             if(coll.checkCollision(coll.getDownCollPoints(),0,10)){
                 grounded = true;

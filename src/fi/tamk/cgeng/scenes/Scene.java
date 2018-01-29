@@ -39,6 +39,7 @@ public abstract class Scene{
     /**
      * Painting of this Scene happens in this 
      * method
+     * @param g Graphics object this Scene is drawn with
      */
     public abstract void paint(Graphics g);
 
@@ -55,6 +56,7 @@ public abstract class Scene{
 
     /**
      * Short access to games KeyboardListener
+     * @return KeyboardListener
      */
     public KeyboardListener accessKeyboardListener(){
         return sceneManager.getGame().getDisplay().getKeyboardListener();
@@ -62,6 +64,7 @@ public abstract class Scene{
 
     /**
      * Short access to games MousepadListener
+     * @return MousepadListener
      */
     public MousepadListener accessMousepadListener(){
         return sceneManager.getGame().getDisplay().getMousepadListener();

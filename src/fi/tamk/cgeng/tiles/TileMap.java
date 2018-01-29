@@ -147,6 +147,7 @@ public class TileMap{
      * Returns tile at tileMap's [x][y]
      * @param x x coordinate of tileMap
      * @param y y coordinate of tileMap
+     * @return tile at arrays x/y
      */
     public Tile tileAt(int x, int y){
         if(x > 0 && x < tileMap.length && y > 0 && y < tileMap[0].length){
@@ -160,6 +161,7 @@ public class TileMap{
      * Returns tile with id of 0 if there is no tile
      * @param x x coordinate in pixels
      * @param y y coordinate in pixels
+     * @return tile at coordinate x and y
      */
     public Tile tileAtCoord(int x, int y){
         if(x < 0|| y < 0){

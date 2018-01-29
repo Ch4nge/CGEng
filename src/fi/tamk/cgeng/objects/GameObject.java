@@ -18,15 +18,35 @@ import java.awt.image.BufferedImage;
  * is being called by default in update
  */
 public abstract class GameObject extends Sprite{
-
+    /**
+     * Colliding bounds of object
+     */
     private Rectangle bounds;
+    /**
+     * Coordinate x of bounds
+     */
     private int boundsX = 0;
+    /**
+     * Coordinate y of bounds
+     */
     private int boundsY = 0;
 
+    /**
+     * Tilemap to check collisions with
+     */
     private Optional<TileMap> map;
+    /**
+     * Optional collision system of object
+     */
     private Optional<CollisionSystem> collSys;
 
+    /**
+     * KeyboardListener
+     */
     private KeyboardListener keyboardListener;
+    /**
+     * MousepadListener
+     */
     private MousepadListener mousepadListener;
 
     /**
@@ -54,7 +74,6 @@ public abstract class GameObject extends Sprite{
      * @param y y coordinate of GameObject
      * @param width width of GameObject
      * @param height height of GameObject
-     * @param image Texture of GameObject
      * @param map tileMap we are checking collisions with
      */
     public GameObject(int x, int y, int width, int height, TileMap map){
@@ -89,10 +108,7 @@ public abstract class GameObject extends Sprite{
      */
     public GameObject(int x, int y, int width, int height){
         super(x,y,width,height);
-        setHeight(height);
-        setWidth(width);
-        setX(x);
-        setY(y);
+        setBounds(0,0,width,height);
         map = Optional.empty();
         collSys = Optional.empty();
     }
@@ -106,6 +122,7 @@ public abstract class GameObject extends Sprite{
     /**
      * Adds automatic collision system between tileMap
      * and object
+     * @param map tileMap to check collisons with
      */
     public void addCollisionSystem(TileMap map){
         collSys = Optional.of(new CollisionSystem(this));

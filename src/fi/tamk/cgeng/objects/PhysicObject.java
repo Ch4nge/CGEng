@@ -259,6 +259,9 @@ public abstract class PhysicObject extends GameObject{
 
     /**
      * Sets all neccessary physics settings of PhysicObject
+     * @param weight weight of object
+     * @param gravity gravity
+     * @param time forces fade time
      */
     public void setFysicsSettings(float weight,float gravity, double time){
         setWeight(weight);

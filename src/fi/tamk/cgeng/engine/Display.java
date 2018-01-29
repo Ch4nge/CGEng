@@ -58,7 +58,7 @@ public class Display extends JFrame{
     }
 
     /**
-     * MousepadListener of the game 
+     * @return MousepadListener of the game 
      */
     public MousepadListener getMousepadListener(){
         return mousepadListener;

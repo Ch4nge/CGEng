@@ -2,7 +2,9 @@ package fi.tamk.cgeng.engine;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-
+/**
+ * Easy access to keyboard inputs.
+ */
 public class KeyboardListener implements KeyListener{
 
     /**

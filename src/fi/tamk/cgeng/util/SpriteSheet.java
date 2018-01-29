@@ -34,6 +34,10 @@ public class SpriteSheet {
     /**
      * Crops all images from SpriteSheet and returns
      * array of BufferedImages
+     * @param width width of sheet in images
+     * @param height height of sheet in images
+     * @param imgWidth width of single image
+     * @param imgHeight height of single image
      * @return Contents of SpriteSheet as BufferedImage array
      */
     public BufferedImage[] cropAll(int width, int height, int imgWidth, int imgHeight){
